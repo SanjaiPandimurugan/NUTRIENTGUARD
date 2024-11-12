@@ -7,6 +7,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.6",
     "@mui/material": "^5.15.6",
+    "@mui/styles": "^5.15.6",
     "axios": "^1.6.5",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
+    "nodemon": "^3.0.2",
     "react-scripts": "5.0.1"
   },
   "scripts": {
@@ -27,9 +29,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "set PORT=8080 && node server/index.js",
+    "server": "nodemon server/index.js",
     "dev": "concurrently \"npm run server\" \"npm start\"",
-    "install-all": "npm install"
+    "install-all": "npm install",
+    "test-db": "node server/utils/testMongoDB.js"
   },
   "eslintConfig": {
     "extends": [
@@ -49,5 +52,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:5000"
 }
