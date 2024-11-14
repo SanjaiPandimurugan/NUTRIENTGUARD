@@ -1,64 +1,19 @@
 import React, { useState } from 'react';
-import { Home, ChartBar, Settings, Info, LogOut, Globe, Menu } from 'lucide-react';
+import { Home, ChartBar, Settings, Info, LogOut, Menu } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import logoImage from '../assets/logo3.png';
-
-const translations = {
-  en: {
-    dashboard: "Dashboard",
-    analytics: "Analytics",
-    settings: "Settings",
-    about: "About",
-    logout: "Logout",
-    changeLanguage: "Change Language",
-    projectName: "Soil Nutrient Monitor"
-  },
-  ta: {
-    dashboard: "டாஷ்போர்டு",
-    analytics: "பகுப்பாய்வு",
-    settings: "அமைப்புகள்",
-    about: "பற்றி",
-    logout: "வெளியேறு",
-    changeLanguage: "மொழியை மாற்று",
-    projectName: "மண் ஊட்டச்சத்து கண்காணிப்பு"
-  },
-  // ... (keep other language translations)
-};
-
-const languageNames = {
-  en: "English",
-  ta: "தமிழ்",
-  hi: "हिंदी",
-  te: "తెలుగు",
-  kn: "ಕನ್ನಡ",
-  ml: "മലയാളം"
-};
+import logoImage from '../assets/logo6.png';
 
 const Navbar = ({ onLogout }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [language, setLanguage] = useState('en');
-  const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
-  const t = (key) => translations[language][key];
-
   const menuItems = [
-    { icon: Home, label: t('dashboard'), path: '/' },
-    { icon: ChartBar, label: t('analytics'), path: '/analytics' },
-    { icon: Settings, label: t('settings'), path: '/settings' },
-    { icon: Info, label: t('about'), path: '/about' },
+    { icon: Home, label: 'Dashboard', path: '/' },
+    { icon: ChartBar, label: 'Analytics', path: '/analytics' },
+    { icon: Settings, label: 'Settings', path: '/settings' },
+    { icon: Info, label: 'About', path: '/about' },
   ];
-
-  const handleLogout = () => {
-    onLogout();
-    navigate('/login');
-  };
-
-  const handleLanguageChange = (lang) => {
-    setLanguage(lang);
-    setShowLanguageDropdown(false);
-  };
 
   return (
     <nav className="bg-emerald-800 text-white shadow-lg">
@@ -66,7 +21,7 @@ const Navbar = ({ onLogout }) => {
         <div className="flex justify-between items-center h-16">
           {/* Logo and Company Name */}
           <div className="flex items-center space-x-4">
-            <img src={logoImage} alt="Logo" className="h-20 w-auto" />
+            <img src={logoImage} alt="Nutrient Monitor" className="h-8" />
             <span className="font-bold text-xl">FertileFuture</span>
           </div>
 
@@ -86,32 +41,9 @@ const Navbar = ({ onLogout }) => {
               </Link>
             ))}
 
-            {/* Language Selector */}
-            <div className="relative">
-              <button
-                onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
-                className="flex items-center space-x-2 px-3 py-2 rounded-md hover:bg-emerald-700"
-              >
-                <Globe size={18} />
-              </button>
-              {showLanguageDropdown && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                  {Object.entries(languageNames).map(([code, name]) => (
-                    <button
-                      key={code}
-                      onClick={() => handleLanguageChange(code)}
-                      className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                      {name}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
             {/* Logout Button */}
             <button
-              onClick={handleLogout}
+              onClick={onLogout}
               className="flex items-center space-x-2 px-3 py-2 rounded-md hover:bg-emerald-700"
             >
               <LogOut size={18} />
@@ -149,11 +81,11 @@ const Navbar = ({ onLogout }) => {
               </Link>
             ))}
             <button
-              onClick={handleLogout}
+              onClick={onLogout}
               className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium w-full hover:bg-emerald-600"
             >
               <LogOut size={18} />
-              <span>{t('logout')}</span>
+              <span>Logout</span>
             </button>
           </div>
         </div>
